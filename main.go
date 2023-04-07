@@ -1,1 +1,5 @@
-package dapp
+package main
+
+func main() {
+
+}
