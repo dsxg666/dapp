@@ -1,0 +1,97 @@
+{{define "main/index.html"}}
+    <!doctype html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dsxg DApp</title>
+        <link rel="shortcut icon" href="/static/img/favicon.png">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown">游戏类</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown">金融类</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">博彩</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <span id="showDsxgCoin" style="margin-right: 10px"></span>
+                <span id="showAccount" style="margin-right: 10px"></span>
+                <span id="showNetwork" style="margin-right: 10px"></span>
+                <button type="button" class="btn btn-primary" id="enableEthereumButton">连接MetaMask</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <div class="p-5 text-center bg-body-tertiary rounded-3">
+            <img class="bi mt-4 mb-3" src="/static/img/favicon.png" style="user-select: none">
+            <h1 class="text-body-emphasis">Welcome To Dsxg DApp World</h1>
+            <p class="col-lg-8 mx-auto fs-5 text-muted">
+                在这里，所有的 DApp 都将使用 ERC-20 代币 DsxgCoin 作为交易虚拟货币，<a
+                        href="https://github.com/dsxg666/contracts/blob/master/token/ERC20/ERC20.sol" target="_blank">查看合约</a>，合约地址：0xBE1EA906d96bfA94195f2b212089cCee9451f387。使用网络为以太坊
+                Sepolia 测试网。DsxgCoin 需要由 SepoliaETH 进行兑换，兑换比例为 1 DsxgCoin : 1 Wei。
+            </p>
+            <div class="d-inline-flex gap-2 mb-5">
+                <input type="text" style="padding-left: 10px" id="inputDsxgCoin"/>
+                <button class="btn btn-outline-secondary btn-lg px-4" type="button" id="topUp">
+                    充值
+                </button>
+                <button class="btn btn-outline-secondary btn-lg px-4" type="button" id="withdraw">
+                    提出
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let web3js = null;
+        let erc20Contract = null;
+        let currentAccount = null;
+        let currentChainId = null;
+        let currentDsxgCoin = null;
+    </script>
+    <script src="/static/js/web3.min.js"></script>
+    <script src="/static/js/web3-init.js"></script>
+    <script src="/static/js/erc20.js"></script>
+    <script src="/static/js/metamask.js" type="module"></script>
+    <script>
+        $("#topUp").click(() => {
+            let dsxgCoin = $("#inputDsxgCoin").val();
+            if (verifyDsxgCoin(dsxgCoin)) {
+                
+            } else {
+                alert("无效输入");
+            }
+        })
+        $("#withdraw").click(() => {
+            let dsxgCoin = $("#inputDsxgCoin").val();
+            if (verifyDsxgCoin(dsxgCoin)) {
+
+            } else {
+                alert("无效输入");
+            }
+        })
+
+        function verifyDsxgCoin(dsxgCoin) {
+            return /^[1-9]\d*$/.test(dsxgCoin);
+        }
+    </script>
+    </body>
+    </html>
+{{end}}
